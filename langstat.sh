@@ -164,6 +164,63 @@ case $display_opt in
 
 	;;
     "wlength")
+        tmp_file_v1="tmp_stats_v1.txt"
+	tmp_file_v2="tmp_stats_v2.txt"
+	printf '' > $tmp_file_v1
+	printf '' > $tmp_file_v2
+
+	# use an additional temporary file to store 
+	# the length (number of characters) of each word in the dictionary
+
+	echo -e "Display the statistics on the words length\n(the percentage of words having x characters, with x in [1, lmax])"
+	echo -e "\nThis may take a while ...\n"
+
+
+	while read word
+	do
+
+	    n=${#word}					# the number of characters in the current word
+	    let "n = n - 1"				# remove the extra character (white space / carriagee return)
+
+	    printf "%40s " $word  >> $tmp_file_v1	# right align word
+	    printf "%5d\n" $n	  >> $tmp_file_v1	# right align length
+
+	done < $dico_file				# read the dictionary file, line by line
+
+	# sort the data in the file by the second field (length of words)
+	sort -n -k2 $tmp_file_v1 -o $tmp_file_v1	# save the sorted data in the same file
+
+	# get the maximum length of words (the second field in the last line of the sorted data)
+	lmax=$(tail -n1 $tmp_file_v1 | awk '{print $2}')
+
+	# get the number of words having a length equal to 'i'
+	# 	( 'i' is a numerical value in the interval [1, lmax] )
+	# divide the number of words of length 'i' by the total number of words in the file
+	#  - for          -> each word length (interval [1, lmax])
+	#  - grep         -> search for the given length in the temporary file
+	#  - wc -l        -> count the number of matching lines
+	#  - printf "%3d" -> print the given numerical variable right aligned (width of 3)"
+	#  - printf "%8s" -> print the given variable right aligned (width of 8)"
+
+	nwords=$(cat $dico_file | wc -l)
+
+	for i in `seq 1 $lmax`
+	do
+	    niwords=$(grep -w $i $tmp_file_v1 | wc -l)
+
+	    if [ $nwords -ne 0 ]
+	    then
+	        piwords=$(echo $niwords $nwords | awk '{printf "%.4f", $1 * 100 / $2}')
+		printf "%3d character(s) -" $i  >> $tmp_file_v2
+		printf "%8s%%\n" $piwords	>> $tmp_file_v2	
+	    fi
+	done
+
+	cat $tmp_file_v2
+
+	rm -f $tmp_file_v1
+	rm -f $tmp_file_v2
+
         ;;
     *)
         echo "Error: unknown display option".
