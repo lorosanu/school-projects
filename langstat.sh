@@ -6,12 +6,12 @@
 
 if [ $# -ne 1  ] && [ $# -ne 2 ]
 then
-    echo "Description : output statistics on the letters present in a dictionary file"
-    echo ""
-    echo "Usage: $0 <file> --opt={alpha, num, freq, hist, wlength}"
-    echo "<file> : the dictionary's filename"
-    echo "--opt  : optional argument, the display mode."
-    echo "         Choose a value from : "
+echo "Description : output statistics on the letters present in a dictionary file"
+echo ""
+echo "Usage: $0 <file> --opt={alpha, num, freq, hist, wlength}"
+echo "<file> : the dictionary's filename"
+echo "--opt  : optional argument, the display mode."
+echo "         Choose a value from : "
     echo "          - 'alpha'   = sort in alphabetic order of letters (* by default)"
     echo "          - 'num'     = sort in decreasing order the number of occurrences for each letter"
     echo "          - 'freq'    = sort in decreasing order the frequency of occurrences for each letter"
@@ -55,7 +55,7 @@ fi
 
 case $display_opt in
     "alpha")
-        echo "Display the number of occurrences of each letter"
+        echo -e "Display the number of occurrences of each letter\n"
 
 	# count the number of occurrences of each letter in the file (how many words contain that letter)
 	# - for		  => each letter (upper mode) in the alphabet (sequence A..Z)
@@ -71,13 +71,36 @@ case $display_opt in
 
 	;;
     "num")
+        tmp_file="tmp_stats.txt"
+	printf '' > $tmp_file
+
+	echo -e "Display the number of occurrences for each letter\n(decreasing order of occurrences)\n"
+
+	# count the number of occurrences of each letter in the file (how many words contain that letter)
+	#  - for          -> each letter (upper mode) in the alphabet (sequence A..Z)
+	#  - grep         -> search for the given letter
+	#  - wc -l        -> count the number of matching lines
+	#  - printf "%8d" -> print the given numeric variable right aligned (width of 8)"
+
+	for letter in {A..Z}
+	do
+	    letter_count=$(grep $letter $dico_file | wc -l)
+	    printf "%8d - $letter\n" $letter_count >> $tmp_file
+	done
+
+	# sort by the first field (first column) : the number of occurrences (numerical value);
+	# display reversed : decreasing order
+
+	sort -k1 -n -r $tmp_file
+	rm -f $tmp_file
+
 	;;
     "freq")
         ;;
     "hist")
-    	;;
+        ;;
     "wlength")
-    	;;
+        ;;
     *)
         echo "Error: unknown display option".
 	echo "Choose one from the list: --opt={alpha, num, freq, hist, wlength"
