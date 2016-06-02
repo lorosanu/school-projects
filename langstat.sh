@@ -96,7 +96,33 @@ case $display_opt in
 
 	;;
     "freq")
-        ;;
+        tmp_file="tmp_stats.txt"
+	printf '' > $tmp_file
+
+	echo -e "Display the frequency of occurrences for each letter\n(decreasing order of occurrences)\n"
+
+	# count the number of occurrences of each letter in the file (how many words contain that letter)
+	# divide the number of occurrences by the total number of words in the file
+	#  - for          -> each letter (upper mode) in the alphabet (sequence A..Z)
+	#  - grep         -> search for the given letter
+	#  - wc -l        -> count the number of matching lines
+	#  - printf "%6s" -> print the given variable right aligned (width of 6)"
+
+	nwords=$(cat $dico_file | wc -l)
+	for letter in {A..Z}
+	do
+	    letter_count=$(grep $letter $dico_file | wc -l)
+	    letter_freq=$(echo $letter_count $nwords | awk '{printf "%.2f", $1 * 100 / $2}')
+	    printf "%6s%% - $letter\n" $letter_freq >> $tmp_file
+	done
+
+	# sort by the first field (first column) : the frequency of occurrences (numerical value);
+        # display reversed : decreasing order
+
+	sort -k1 -n -r $tmp_file
+	rm -f $tmp_file
+
+	;;
     "hist")
         ;;
     "wlength")
