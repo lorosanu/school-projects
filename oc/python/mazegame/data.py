@@ -1,0 +1,2 @@
+mapDir  = "maps"
+gameDir = "games"
