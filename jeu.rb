@@ -1,10 +1,11 @@
+#!/usr/bin/ruby
 
 #================================
 # definitions des classes
 #================================
 
 class Personne
-  attr_accessor :nom, :points_de_vie, :en_vie
+  attr_reader :nom, :points_de_vie, :en_vie
 
   def initialize(nom)
     @nom = nom
@@ -17,62 +18,70 @@ class Personne
   end
 
   def attaque(personne)
-    puts "#{@nom} attaque #{personne.nom}"
-    personne.subit_attaque(degats()) 		# la personne attaquée subit des dégats 
-    										# le nombre des points perdus deppend de l'identité de l'attaquant
-											# (appel de la methode propre à la classe fille)
+    puts("#{@nom} attaque #{personne.nom}")
+
+    # la personne attaquée subit des dégats
+    # le nombre des points perdus deppend de l'identité de l'attaquant
+    # (appel de la methode propre à la classe fille)
+    personne.subit_attaque(degats())
   end
 
   def subit_attaque(degats_recus)
-    if @points_de_vie <= 0 
-      puts "Dommage. #{@nom} était deja mort ..."
+    if @points_de_vie <= 0
+      puts("   Dommage, #{@nom} était deja mort ...")
     else
       @points_de_vie -= degats_recus
-      puts "#{@nom} subit #{degats_recus}hp de dégats"
+      puts("-- #{@nom} subit #{degats_recus}hp de dégats")
 
       if @points_de_vie <= 0
         @en_vie = false
-        puts "#{@nom} a été vaincu"
+        puts("#{@nom} a été vaincu")
       end
-    end  
+    end
   end
 end
 
 class Joueur < Personne
-  attr_accessor :degats_bonus
+  attr_reader :degats_bonus
 
   def initialize(nom)
-    @degats_bonus = 0						# par défaut, le joueur n'a pas de dégats bonus
-    super(nom) 								# appelle le "initialize" de la classe mère (Personne)
+    # appelle le 'initialize' de la classe mère (Personne)
+    super(nom)
+
+    # par défaut, le joueur n'a pas de dégats bonus
+    @degats_bonus = 0
   end
 
   def degats
-    puts "#{@nom} profite de #{@degats_bonus} points de dégats bonus"
-    lance_des = 3 * ( 1 + rand(20) )        # choix personnel : simuler le lancement de trois dés de 20
-    lance_des + @degats_bonus    
+    puts("#{@nom} profite de #{@degats_bonus} points de dégats bonus")
+
+    # choix personnel : simuler le lancement de trois dés de 20
+    lance_des = 3.times.lazy.reduce(0){|s| s + rand(1..20) }
+    lance_des + @degats_bonus
   end
 
   def soin
-    lance_des = 2 * (1 + rand(20))    		# choix personnel : simuler le lancement de deux dés de 20
-    @points_de_vie += lance_des  	
+    # choix personnel : simuler le lancement de deux dés de 20
+    lance_des = 2.times.lazy.reduce(0){|s| s + rand(1..20) }
 
-    puts "#{@nom} regagne #{lance_des} points de vie"
+    @points_de_vie += lance_des
+    puts("++ #{@nom} regagne #{lance_des} points de vie")
 
-    if @points_de_vie > 100
-      @points_de_vie = 100
-    end
+    @points_de_vie = 100 if @points_de_vie > 100
   end
 
   def ameliorer_degats
-    lance_des = 1 + rand(20)    			# choix personnel : simuler le lancement d'un seul dé de 20
-    puts "#{@nom} gagne en puissance : plus #{lance_des} points à ses dégats"
+    # choix personnel : simuler le lancement d'un seul dé de 20
+    lance_des = rand(1..20)
+    puts("++ #{@nom} gagne en puissance : plus #{lance_des} points à ses dégats")
     @degats_bonus += lance_des
   end
 end
 
 class Ennemi < Personne
   def degats
-    1 + rand(12)							# choix personnel : simuler le lancement d'un seul dé de 12
+    # choix personnel : simuler le lancement d'un seul dé de 12
+    1 + rand(12)
   end
 end
 
@@ -84,138 +93,118 @@ class Jeu
     puts "1 - Améliorer son attaque"
 
     # action > 2 : attaquer les enemis
-    i = 2
-    monde.ennemis.each do |ennemi|
-      puts "#{i} - Attaquer #{ennemi.info}"
-      i = i + 1
+    monde.ennemis.each_with_index do |ennemi, index|
+      puts "#{index + 2} - Attaquer #{ennemi.info}"
     end
+
     puts "99 - Quitter"
   end
 
   def self.est_fini(joueur, monde)
-    jeu_fini = true
-
-    monde.ennemis.each do |ennemi|
-      if ennemi.en_vie
-        jeu_fini = false
-      end
-    end
-
-    if jeu_fini
-      return true
-    else
-      if ! joueur.en_vie
-	return true
-      else
-        return false
-      end
-    end
+    return true if monde.ennemis.none?{|ennemi| ennemi.en_vie }
+    return true unless joueur.en_vie
+	  false
   end
 end
 
 class Monde
   attr_accessor :ennemis
 
+  def initialize(liste_ennemis=[])
+    @ennemis = []
+    liste_ennemis.each{|ennemi| ajout_ennemi(ennemi) }
+  end
+
+  def ajout_ennemi(ennemi)
+    @ennemis << ennemi
+  end
+
   def ennemis_en_vie
-    liste_ennemis = []
-
-    @ennemis.each do |ennemi|
-      if ennemi.en_vie
-        liste_ennemis << ennemi
-      end
-    end
-
-    liste_ennemis
+    @ennemis.select{|ennemi| ennemi.en_vie }
   end
 end
-
 
 
 #==============================
 # Initialisations
 #==============================
 
-
 # Initialisation du monde
-monde = Monde.new
+monde = Monde.new()
 
 # Ajout des ennemis
-monde.ennemis = [
-  Ennemi.new("Balrog"),
-  Ennemi.new("Goblin"),
-  Ennemi.new("Squelette")
-]
-
+monde.ajout_ennemi(Ennemi.new('Balrog'))
+monde.ajout_ennemi(Ennemi.new('Goblin'))
+monde.ajout_ennemi(Ennemi.new('Squelette'))
 
 # Initialisation du joueur
-joueur = Joueur.new("Jean-Michel Paladin")
+joueur = Joueur.new('Jean-Michel Paladin')
 
 
 #==============================
 # Jeu principal
 #==============================
 
-
-puts "\n\nAinsi débutent les aventures de #{joueur.nom}\n\n"
-
+puts("\nAinsi débutent les aventures de #{joueur.nom}\n\n")
 
 100.times do |tour|
-  puts "\n------------------ Tour numéro #{tour} ------------------"
+  puts(" Tour numéro #{tour} ".center(70, '-'), "\n")
 
-  Jeu.actions_possibles(monde)				# affiche les différentes actions possibles
+  # affiche les différentes actions possibles
+  Jeu.actions_possibles(monde)
 
-  puts "\nQUELLE ACTION FAIRE ?"
+  puts("\nQUELLE ACTION FAIRE ?")
   STDOUT.flush
 
-  choix = gets.chomp.to_i					# la variable "choix" stocke ce que l'utilisateur renseigne
+  # la variable "choix" stocke ce que l'utilisateur renseigne
+  choix = gets.chomp.to_i
 
   case choix
-  when 0									# soigner ses blessures
+  when 0
+    # soigner ses blessures
     joueur.soin
-  when 1									# ameliorer ses degats
+  when 1
+    # ameliorer ses degats
     joueur.ameliorer_degats
-  when 2..(monde.ennemis.size + 1)			# attaquer un enemi (options 2, ...)
+  when 2..(monde.ennemis.size + 1)
+    # attaquer un enemi (options 2, ...)
     ennemi_a_attaquer = monde.ennemis[choix - 2]
     joueur.attaque(ennemi_a_attaquer)
-  when 99						# quitter la partie
-    puts "Vous quittez la partie !"
+  when 99
+    # quitter la partie
+    puts("Vous quittez la partie !")
     break
   else
-    puts "Mauvaise nouvelle ... votre choix est invalide..."
+    puts("Mauvaise nouvelle ... votre choix est invalide...")
   end
 
-  puts "\nLES ENNEMIS RIPOSTENT !"
-  monde.ennemis_en_vie.each do |ennemi|		# pour les enemies en vie
-    ennemi.attaque(joueur)					# le héro subit une attaque
+  if monde.ennemis.any?{|ennemi| ennemi.en_vie }
+    # le héro subit une attaque de chaque enemi encore en vie
+    puts("\nLES ENNEMIS RIPOSTENT !")
+    monde.ennemis_en_vie.each{|ennemi| ennemi.attaque(joueur) }
   end
 
-  puts "\nEtat du héro: #{joueur.info}\n"
+  puts("\nEtat du héro: #{joueur.info}\n\n")
 
-  break if Jeu.est_fini(joueur, monde)		# si le jeu est fini, on interompt la boucle
+  # si le jeu est fini, on interompt la boucle
+  break if Jeu.est_fini(joueur, monde)
 end
-
 
 
 #==============================
 # fin de la partie
 #==============================
 
-puts "\nGame Over!\n\n"
+puts("\nGame Over!\n\n")
 
-puts "Etat du jeu en fin de partie : "
-puts "================================================================"
-puts "Votre personnage : #{joueur.info}"
-puts "Vos ennemis :      #{monde.ennemis_en_vie.size} ennemi(s) en vie "
-
-monde.ennemis_en_vie.each do |ennemi|
-  puts "\t\t\t" + ennemi.info
-end
+puts('Etat du jeu en fin de partie : ')
+puts('-' * 70)
+puts("Votre personnage : #{joueur.info}")
+puts("Vos ennemis :      #{monde.ennemis_en_vie.size} ennemi(s) en vie ")
+monde.ennemis_en_vie.each{|ennemi| puts(ennemi.info.to_s.rjust(40)) }
 
 if joueur.en_vie
-  if Jeu.est_fini(joueur, monde) 
-    puts "\nVous avez gagné !"
-  end
+  puts("\nVous avez gagné !") if Jeu.est_fini(joueur, monde)
 else
-  puts "\nVous avez perdu !"
+  puts("\nVous avez perdu !")
 end
-
