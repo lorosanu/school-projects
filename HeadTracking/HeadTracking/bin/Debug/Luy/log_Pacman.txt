@@ -1,0 +1,227 @@
+4
+
+Dictionary:
+40 Down
+37 Left
+39 Right
+38 Up
+
+Threshold:
+Down 7
+Left 12
+Right 10
+Up 7
+
+All data collected:
+
+Key pressed: Up
+HeadMovement: Down, Frequency: 1
+HeadMovement / Amplitude / Frequency
+0 12 1
+
+
+Threshold: 12
+
+
+HeadMovement: Left, Frequency: 17
+HeadMovement / Amplitude / Frequency
+1 3 4
+1 6 6
+1 7 3
+1 8 1
+1 12 1
+1 15 1
+1 16 1
+
+
+Threshold: 7
+
+
+HeadMovement: Right, Frequency: 10
+HeadMovement / Amplitude / Frequency
+2 3 1
+2 5 1
+2 6 2
+2 10 1
+2 14 1
+2 15 1
+2 16 1
+2 18 1
+2 34 1
+
+
+Threshold: 12
+
+
+HeadMovement: Up, Frequency: 20
+HeadMovement / Amplitude / Frequency
+3 3 4
+3 6 6
+3 7 1
+3 8 2
+3 9 3
+3 10 2
+3 13 1
+3 17 1
+
+
+Threshold: 7
+
+
+
+Key pressed: Left
+HeadMovement: Down, Frequency: 4
+HeadMovement / Amplitude / Frequency
+0 3 1
+0 4 2
+0 6 1
+
+
+Threshold: 4
+
+
+HeadMovement: Left, Frequency: 35
+HeadMovement / Amplitude / Frequency
+1 3 5
+1 5 1
+1 6 6
+1 8 2
+1 9 2
+1 10 1
+1 11 1
+1 12 1
+1 13 2
+1 14 2
+1 16 1
+1 17 1
+1 18 2
+1 19 1
+1 21 1
+1 23 1
+1 24 1
+1 25 2
+1 28 1
+1 35 1
+
+
+Threshold: 12
+
+
+HeadMovement: Right, Frequency: 7
+HeadMovement / Amplitude / Frequency
+2 3 3
+2 6 2
+2 8 1
+2 9 1
+
+
+Threshold: 5
+
+
+HeadMovement: Up, Frequency: 7
+HeadMovement / Amplitude / Frequency
+3 3 1
+3 5 1
+3 6 4
+3 7 1
+
+
+Threshold: 5
+
+
+
+Key pressed: Right
+HeadMovement: Down, Frequency: 5
+HeadMovement / Amplitude / Frequency
+0 3 2
+0 6 2
+0 14 1
+
+
+Threshold: 6
+
+
+HeadMovement: Left, Frequency: 2
+HeadMovement / Amplitude / Frequency
+1 9 1
+1 13 1
+
+
+Threshold: 11
+
+
+HeadMovement: Right, Frequency: 46
+HeadMovement / Amplitude / Frequency
+2 3 5
+2 4 2
+2 5 2
+2 6 9
+2 7 3
+2 8 3
+2 9 3
+2 10 1
+2 12 1
+2 13 4
+2 14 3
+2 15 3
+2 17 1
+2 18 2
+2 19 1
+2 22 1
+2 24 1
+2 28 1
+
+
+Threshold: 10
+
+
+HeadMovement: Up, Frequency: 5
+HeadMovement / Amplitude / Frequency
+3 3 3
+3 6 2
+
+
+Threshold: 4
+
+
+
+Key pressed: Down
+HeadMovement: Down, Frequency: 14
+HeadMovement / Amplitude / Frequency
+0 3 2
+0 4 2
+0 6 5
+0 9 1
+0 10 1
+0 11 1
+0 12 2
+
+
+Threshold: 7
+
+
+HeadMovement: Left, Frequency: 10
+HeadMovement / Amplitude / Frequency
+1 3 4
+1 6 3
+1 10 1
+1 12 1
+1 13 1
+
+
+Threshold: 6
+
+
+HeadMovement: Right, Frequency: 8
+HeadMovement / Amplitude / Frequency
+2 3 2
+2 4 1
+2 6 3
+2 10 1
+2 13 1
+
+
+Threshold: 6
+
+
+

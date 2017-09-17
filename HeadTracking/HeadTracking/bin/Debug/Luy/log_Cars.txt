@@ -1,0 +1,90 @@
+2
+
+Dictionary:
+39 Left
+37 Right
+
+Threshold:
+Left 6
+Right 12
+
+All data collected:
+
+Key pressed: Left
+HeadMovement: Down, Frequency: 2
+HeadMovement / Amplitude / Frequency
+0 3 1
+0 6 1
+
+
+Threshold: 4
+
+
+HeadMovement: Left, Frequency: 6
+HeadMovement / Amplitude / Frequency
+1 3 3
+1 6 1
+1 12 2
+
+
+Threshold: 6
+
+
+HeadMovement: Right, Frequency: 71
+HeadMovement / Amplitude / Frequency
+2 3 33
+2 4 2
+2 5 1
+2 6 15
+2 7 2
+2 9 2
+2 12 3
+2 15 2
+2 16 1
+2 22 1
+2 26 1
+2 30 2
+2 33 1
+2 45 1
+2 48 1
+2 52 1
+2 142 1
+2 154 1
+
+
+Threshold: 12
+
+
+
+Key pressed: Right
+HeadMovement: Left, Frequency: 43
+HeadMovement / Amplitude / Frequency
+1 3 26
+1 6 6
+1 7 1
+1 9 5
+1 12 3
+1 27 1
+1 42 1
+
+
+Threshold: 6
+
+
+HeadMovement: Right, Frequency: 2
+HeadMovement / Amplitude / Frequency
+2 3 2
+
+
+Threshold: 3
+
+
+HeadMovement: Up, Frequency: 1
+HeadMovement / Amplitude / Frequency
+3 3 1
+
+
+Threshold: 3
+
+
+

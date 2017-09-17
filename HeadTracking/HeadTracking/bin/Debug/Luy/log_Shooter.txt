@@ -1,0 +1,230 @@
+2
+
+Dictionary:
+37 Left
+39 Right
+
+Threshold:
+Left 18
+Right 13
+
+All data collected:
+
+Key pressed: Up
+HeadMovement: Left, Frequency: 10
+HeadMovement / Amplitude / Frequency
+1 3 1
+1 5 1
+1 8 1
+1 12 1
+1 16 1
+1 19 1
+1 23 1
+1 25 1
+1 26 1
+1 43 1
+
+
+Threshold: 18
+
+
+HeadMovement: Right, Frequency: 11
+HeadMovement / Amplitude / Frequency
+2 4 1
+2 6 1
+2 7 1
+2 8 1
+2 10 1
+2 11 1
+2 23 1
+2 32 1
+2 35 2
+2 46 1
+
+
+Threshold: 19
+
+
+
+Key pressed: Down
+HeadMovement: Down, Frequency: 1
+HeadMovement / Amplitude / Frequency
+0 9 1
+
+
+Threshold: 9
+
+
+HeadMovement: Left, Frequency: 16
+HeadMovement / Amplitude / Frequency
+1 4 1
+1 5 1
+1 6 5
+1 7 1
+1 12 1
+1 14 2
+1 19 1
+1 21 1
+1 24 1
+1 36 1
+1 40 1
+
+
+Threshold: 14
+
+
+HeadMovement: Right, Frequency: 11
+HeadMovement / Amplitude / Frequency
+2 3 1
+2 6 1
+2 7 1
+2 11 1
+2 20 1
+2 21 1
+2 26 1
+2 31 1
+2 36 1
+2 44 1
+2 57 1
+
+
+Threshold: 23
+
+
+HeadMovement: Up, Frequency: 5
+HeadMovement / Amplitude / Frequency
+3 4 1
+3 5 1
+3 6 3
+
+
+Threshold: 5
+
+
+
+Key pressed: Left
+HeadMovement: Down, Frequency: 5
+HeadMovement / Amplitude / Frequency
+0 3 2
+0 4 1
+0 6 1
+0 20 1
+
+
+Threshold: 7
+
+
+HeadMovement: Left, Frequency: 33
+HeadMovement / Amplitude / Frequency
+1 3 2
+1 4 3
+1 6 1
+1 7 1
+1 8 2
+1 9 1
+1 12 3
+1 13 1
+1 15 2
+1 16 3
+1 17 1
+1 18 1
+1 20 1
+1 23 1
+1 26 1
+1 28 1
+1 30 1
+1 31 2
+1 35 2
+1 36 1
+1 41 1
+1 50 1
+
+
+Threshold: 18
+
+
+HeadMovement: Right, Frequency: 13
+HeadMovement / Amplitude / Frequency
+2 3 1
+2 4 1
+2 6 2
+2 8 2
+2 12 1
+2 14 1
+2 15 2
+2 19 1
+2 32 1
+2 61 1
+
+
+Threshold: 15
+
+
+HeadMovement: Up, Frequency: 2
+HeadMovement / Amplitude / Frequency
+3 4 1
+3 6 1
+
+
+Threshold: 5
+
+
+
+Key pressed: Right
+HeadMovement: Down, Frequency: 2
+HeadMovement / Amplitude / Frequency
+0 7 1
+0 9 1
+
+
+Threshold: 8
+
+
+HeadMovement: Left, Frequency: 11
+HeadMovement / Amplitude / Frequency
+1 3 1
+1 6 3
+1 11 1
+1 12 1
+1 19 1
+1 20 1
+1 23 2
+1 29 1
+
+
+Threshold: 14
+
+
+HeadMovement: Right, Frequency: 31
+HeadMovement / Amplitude / Frequency
+2 3 5
+2 6 3
+2 7 1
+2 8 3
+2 11 2
+2 12 3
+2 13 2
+2 14 2
+2 15 1
+2 18 2
+2 21 3
+2 23 1
+2 32 1
+2 37 1
+2 42 1
+
+
+Threshold: 13
+
+
+HeadMovement: Up, Frequency: 3
+HeadMovement / Amplitude / Frequency
+3 3 1
+3 6 1
+3 16 1
+
+
+Threshold: 8
+
+
+
